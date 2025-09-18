@@ -2,6 +2,7 @@ const express = require('express');
 const healthController = require('../controllers/health');
 const booksRouter = require('./books');
 const authRouter = require('./auth');
+const ordersRouter = require('./orders');
 
 const router = express.Router();
 // Health endpoint
@@ -41,8 +42,11 @@ router.get('/', healthController.check.bind(healthController));
  *     description: Endpoints for browsing books
  *   - name: Auth
  *     description: Authentication endpoints
+ *   - name: Orders
+ *     description: Endpoints for managing orders
  */
 router.use('/books', booksRouter);
 router.use('/auth', authRouter);
+router.use('/orders', ordersRouter);
 
 module.exports = router;
