@@ -18,8 +18,14 @@ const options = {
         },
       },
     },
+    tags: [
+      { name: 'Auth', description: 'Authentication endpoints' },
+      { name: 'Books', description: 'Endpoints for browsing books' },
+      { name: 'Orders', description: 'Endpoints for managing orders' },
+    ],
   },
-  apis: ['./src/routes/*.js'], // Path to the API docs
+  // Include route files for swagger-jsdoc to parse annotations
+  apis: ['./src/routes/*.js'],
 };
 
 const swaggerSpec = swaggerJSDoc(options);

@@ -11,7 +11,9 @@
     "migrate": "knex --knexfile knexfile.js migrate:latest",
     "migrate:rollback": "knex --knexfile knexfile.js migrate:rollback",
     "seed": "knex --knexfile knexfile.js seed:run",
-    "db:reset": "npm run migrate:rollback -- --all || true && rm -f ./data/dev.sqlite3 && npm run migrate && npm run seed"
+    "db:reset": "npm run migrate:rollback -- --all || true && rm -f ./data/dev.sqlite3 && npm run migrate && npm run seed",
+    "openapi:generate": "node generate_openapi.js",
+    "openapi:refresh": "npm run openapi:generate && echo 'OpenAPI spec written to ./interfaces/openapi.json'"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
