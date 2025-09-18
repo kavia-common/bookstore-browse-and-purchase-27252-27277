@@ -8,7 +8,9 @@ Copy `.env.example` to `.env` and adjust as needed:
 
 - PORT: Server port (e.g., 3001)
 - DATABASE_URL: Path to sqlite database file (e.g., ./data/dev.sqlite3)
-- JWT_SECRET: Secret used for signing JWTs
+- JWT_SECRET: Secret used for signing JWTs (required for auth)
+- JWT_EXPIRES_IN: JWT expiry (optional, default 7d)
+- BCRYPT_SALT_ROUNDS: bcrypt cost factor (optional, default 10)
 
 ## Install dependencies
 

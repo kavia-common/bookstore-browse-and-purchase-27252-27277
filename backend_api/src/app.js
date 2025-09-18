@@ -8,6 +8,7 @@ const swaggerSpec = require('../swagger');
 /**
  * Express application initialization and middleware registration.
  * Exposes the API routes and Swagger docs. Reads configuration from environment variables.
+ * Swagger docs available at /docs. Use "Authorize" button with Bearer token for protected endpoints.
  */
 const app = express();
 
