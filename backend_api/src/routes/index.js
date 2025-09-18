@@ -1,5 +1,6 @@
 const express = require('express');
 const healthController = require('../controllers/health');
+const booksRouter = require('./books');
 
 const router = express.Router();
 // Health endpoint
@@ -31,5 +32,13 @@ const router = express.Router();
  *                   example: development
  */
 router.get('/', healthController.check.bind(healthController));
+
+/**
+ * @swagger
+ * tags:
+ *   - name: Books
+ *     description: Endpoints for browsing books
+ */
+router.use('/books', booksRouter);
 
 module.exports = router;

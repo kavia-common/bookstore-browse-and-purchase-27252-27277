@@ -1,10 +1,14 @@
+require('dotenv').config();
 const cors = require('cors');
 const express = require('express');
 const routes = require('./routes');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpec = require('../swagger');
 
-// Initialize express app
+/**
+ * Express application initialization and middleware registration.
+ * Exposes the API routes and Swagger docs. Reads configuration from environment variables.
+ */
 const app = express();
 
 app.use(cors({
@@ -13,17 +17,19 @@ app.use(cors({
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.set('trust proxy', true);
+
+// Swagger UI with dynamic server URL to reflect current host/port
 app.use('/docs', swaggerUi.serve, (req, res, next) => {
-  const host = req.get('host');           // may or may not include port
-  let protocol = req.protocol;          // http or https
+  const host = req.get('host'); // may or may not include port
+  let protocol = req.protocol; // http or https
 
   const actualPort = req.socket.localPort;
   const hasPort = host.includes(':');
-  
+
   const needsPort =
     !hasPort &&
     ((protocol === 'http' && actualPort !== 80) ||
-     (protocol === 'https' && actualPort !== 443));
+      (protocol === 'https' && actualPort !== 443));
   const fullHost = needsPort ? `${host}:${actualPort}` : host;
   protocol = req.secure ? 'https' : protocol;
 
@@ -46,6 +52,7 @@ app.use('/', routes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
+  // eslint-disable-next-line no-console
   console.error(err.stack);
   res.status(500).json({
     status: 'error',
